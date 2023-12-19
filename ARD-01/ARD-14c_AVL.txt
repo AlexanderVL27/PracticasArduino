@@ -1,0 +1,21 @@
+int TRIG = 5;
+int ECHO = 6;
+long tiempo = 0;
+long distancia = 0;
+void setup() {
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+  Serial1.begin(9600);
+}
+void loop() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(5);
+  digitalWrite(TRIG, HIGH);           //envia una señal de ultrasonido
+  tiempo = pulseIn(ECHO, HIGH);       //recibe el rebote
+  tiempo = tiempo / 2;                //obtiene el tiempo de ida
+  distancia = (int)(0.034 * tiempo);  //utiliza la velocidad del sonido en segundos para calcular la distancia
+  Serial1.print("Distancia: ");       //Se muestra la distancia en el Monitor Serial
+  Serial1.println(distancia);
+  Serial1.println(" cm");
+  delay(1000);
+}

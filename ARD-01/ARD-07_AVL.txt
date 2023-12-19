@@ -1,0 +1,20 @@
+const int photocellPin = A0;  // Definimos entrada/salida Analógica para lecturas del Fotoresistor
+int sensorValue = 0;          // Inicializamos el valor del sensor
+const int led = 7;
+void setup() {
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);  //Inicializamos comunicación serial con el Monitor Serial de Arduino IDE
+  //Nótese que el Pin Análogo no necesita especificarse como Entrada/Salida
+}
+void loop() {
+  sensorValue = analogRead(photocellPin);  //se toman las lecturas del sensor
+  Serial.print("Lectura = ");              //Se muestra en el Monitor Serial
+  Serial.println(sensorValue);
+  delay(1000);
+  if (sensorValue < 100 || sensorValue > 900) {
+    digitalWrite(led, HIGH);
+  } else {
+    digitalWrite(led, LOW);
+  }
+}
+a

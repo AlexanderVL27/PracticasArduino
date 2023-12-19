@@ -1,0 +1,21 @@
+int ldr = A0;    //Sensor de luz conectado al pin analógico A0
+int buzzer = 5;  //Buzzer se conecta al pin digital 5
+int valor = 0;   //variable creada para guardar los valores del sensor
+
+void setup() {
+  pinMode(buzzer, OUTPUT);  //configuramos el pin digital 5 como salida
+  Serial.begin(9600);
+}
+
+void loop() {
+  valor = analogRead(ldr);
+  Serial.print("Lectura = ");   //Se muestra en el Monitor Serial
+  Serial.println(valor);  //instrucción para leer y guardar el valor analógico (de 0 a 1023). El valor va desde 0(poca luz) a 1024 (mucha luz)
+  if (valor < 600)              //condición que define que recibe poca luz
+  {
+    digitalWrite(buzzer, 0);  // si recibe poca luz, la salida digital del buzzer estará en valor bajo (no sonará)
+  } else                      //no se cumple la condición (recibe mucha luz)
+  {
+    analogWrite(buzzer, valor / 4);  // si recibe mucha luz, la salida digital del buzzer estará enviando datos al buzzer
+  }
+}

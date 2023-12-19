@@ -1,0 +1,15 @@
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(6,OUTPUT);
+  pinMode(2,INPUT_PULLUP);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  int boton = digitalRead(2);
+  if(boton==0){
+    digitalWrite(6,HIGH);
+  } else{
+    digitalWrite(6,LOW);
+  }
+}
